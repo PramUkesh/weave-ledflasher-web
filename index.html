@@ -6,44 +6,59 @@
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <script src="scripts/weave-discovery.js"></script>
 
+  <link rel="import" href="bower_components/iron-flex-layout/classes/iron-flex-layout.html">
   <link rel="import" href="bower_components/paper-card/paper-card.html">
   <link rel="import" href="bower_components/paper-toggle-button/paper-toggle-button.html">
   <link rel="import" href="bower_components/google-signin/google-signin.html">
   <link rel="import" href="bower_components/paper-styles/typography.html">
   <style is="custom-style">
-    paper-card {
-    @apply(--paper-font-common-base);
+    google-signin {
+      margin-top: 10px;
     }
 
+    paper-card {
+    @apply(--paper-font-common-base);
+      margin: 10px 10px;
+    }
+
+    .toggle {
+      margin: 10px 0;
+    }
   </style>
 </head>
-<body>
+<body class="fullbleed layout vertical wrap">
 <span id="browser-sync-binding"></span>
-<google-signin client-id="461324804763-v4j5bcdspouq6u3khb0f559ilkldir8e.apps.googleusercontent.com"
-               scopes="https://www.googleapis.com/auth/clouddevices"></google-signin>
 
-<template is="dom-bind" id="app">
-  <template is="dom-repeat" items="{{devices}}" as="device">
-    <paper-card elevation="1" id="{{device.id}}">
-      <div class="card-content">
-        <span>[[device.name]]</span> - <span><em>[[device.connectionStatus]]</em></span>
-        <template is="dom-repeat" items="{{getCommandDefs(device.commandDefs)}}">
-          <template is="dom-if" if="{{isSet(item)}}">
-            <template is="dom-repeat" items="{{rangeToArray(item)}}" as="led">
-              <label>LED <span>{{led.id}}</span></label>
-              <paper-toggle-button on-change="toggleLed" _led="{{led.id}}"
-                                   command="[[led.command]]" device="[[device.id]]"
-                                   active="{{isActive(device, led.id)}}"
-                                   checked="{{isActive(device, led.id)}}"
-                                   disabled="{{isOffline(device)}}"></paper-toggle-button>
+<div>
+  <google-signin
+      client-id="461324804763-v4j5bcdspouq6u3khb0f559ilkldir8e.apps.googleusercontent.com"
+      scopes="https://www.googleapis.com/auth/clouddevices"></google-signin>
+</div>
+<div>
+  <template is="dom-bind" id="app">
+    <template is="dom-repeat" items="{{devices}}" as="device">
+      <paper-card elevation="1" id="{{device.id}}">
+        <div class="card-content">
+          <span>[[device.name]]</span> - <span><em>[[device.connectionStatus]]</em></span>
+          <template is="dom-repeat" items="{{getCommandDefs(device.commandDefs)}}">
+            <template is="dom-if" if="{{isSet(item)}}">
+              <template is="dom-repeat" items="{{rangeToArray(item, device.state)}}" as="led">
+                <div class="toggle">
+                  <label>LED <span>{{led.id}}</span></label>
+                  <paper-toggle-button on-change="toggleLed" _led="{{led.id}}"
+                                       command="[[led.command]]" device="[[device.id]]"
+                                       active="{{led.state}}"
+                                       checked="{{led.state}}"
+                                       disabled="{{isOffline(device)}}"></paper-toggle-button>
+                </div>
+              </template>
             </template>
           </template>
-        </template>
-      </div>
-    </paper-card>
+        </div>
+      </paper-card>
+    </template>
   </template>
-</template>
-
+</div>
 <script src="scripts/app.js"></script>
 <script src="https://apis.google.com/js/client.js?onload=gapiLoaded"></script>
 </body>

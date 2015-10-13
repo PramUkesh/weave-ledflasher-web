@@ -19,9 +19,9 @@ var weave = window.weave || {};
    * Handle sign in and start api discovery process
    */
   app.signedIn = function () {
-    if (this.gapiLoaded) {
-      app.loadDiscovery();
-    }
+    gapi.client.clouddevices.devices.list().then(function (resp) {
+      app.set('devices', resp.result.devices);
+    });
   };
 
   /**
@@ -37,11 +37,10 @@ var weave = window.weave || {};
   app.loadDiscovery = function () {
     gapi.client.load(weaveDiscovery, 'v1')
         .then(function () {
-          return gapi.client.clouddevices.devices.list();
+          console.log('gapi loaded');
+        }, function () {
+          console.log('gapi error');
         })
-        .then(function (resp) {
-          app.set('devices', resp.result.devices);
-        });
   };
 
   /**
@@ -118,16 +117,17 @@ var weave = window.weave || {};
    * @param param {Object} commandDef parameters
    * @returns {Array} of objects in the following format
    * {
-   *   'command': [command],
-   *   'id': [id of led]
-   * }
+ *   'command': [command],
+ *   'id': [id of led]
+ * }
    */
-  app.rangeToArray = function (param) {
+  app.rangeToArray = function (param, state) {
     var leds = [];
     for (var i = param.parameters[0].minimum; i <= param.parameters[0].maximum; i++) {
       leds.push({
         'command': param.command,
-        'id': i
+        'id': i,
+        'state': state._ledflasher._leds[i]
       });
     }
     return leds;
@@ -158,5 +158,5 @@ var weave = window.weave || {};
 })();
 
 function gapiLoaded() {
-  weave.app.gapiLoaded = true;
+  weave.app.loadDiscovery();
 }
