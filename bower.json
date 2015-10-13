@@ -1,0 +1,28 @@
+{
+  "name": "web-sample",
+  "version": "0.0.0",
+  "description": "weave web sample",
+  "main": "index.html",
+  "keywords": [
+    "weave",
+    "web",
+    "sample"
+  ],
+  "license": "Apache-V2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "google-signin": "GoogleWebComponents/google-signin#~1.1.0"
+  },
+  "devDependencies": {
+    "iron-form": "PolymerElements/iron-form#~1.0.9",
+    "paper-card": "PolymerElements/paper-card#~1.0.6",
+    "paper-styles": "PolymerElements/paper-styles#~1.0.11",
+    "paper-toggle-button": "PolymerElements/paper-toggle-button#~1.0.11"
+  }
+}
