@@ -1,5 +1,9 @@
 # Weave Sample
 
+## Overview
+This web app is meant to be a sample for the Weave API.  It showcases loading devices 
+and sending commands to weave devices.  It uses Polymer to template and handle multipe devices.
+
 ## Prerequisites
 
 Node
