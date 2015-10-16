@@ -127,7 +127,7 @@ var weave = window.weave || {};
       leds.push({
         'command': param.command,
         'id': i,
-        'state': state._ledflasher._leds[i]
+        'state': state._ledflasher._leds[i - 1]
       });
     }
     return leds;
