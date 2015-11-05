@@ -19,7 +19,7 @@ var weave = window.weave || {};
    * Handle sign in and start api discovery process
    */
   app.signedIn = function () {
-    gapi.client.clouddevices.devices.list().then(function (resp) {
+    gapi.client.weave.devices.list().then(function (resp) {
       app.set('devices', resp.result.devices);
     });
   };
@@ -60,7 +60,7 @@ var weave = window.weave || {};
     if (key) {
       currPath.push(key);
     }
-    if (currElement.kind && currElement.kind === "clouddevices#commandDef") {
+    if (currElement.kind && currElement.kind === "weave#commandDef") {
       var parameters = [];
       for (var param in currElement.parameters) {
         currElement.parameters[param].parameter = param;
@@ -147,7 +147,7 @@ var weave = window.weave || {};
         '_on': event.target.active
       }
     };
-    gapi.client.clouddevices.commands.insert(commandParameter).then(function (resp) {
+    gapi.client.weave.commands.insert(commandParameter).then(function (resp) {
       console.log('success' + JSON.stringify(resp));
     }, function (resp) {
       console.log('failure' + JSON.stringify(resp));
