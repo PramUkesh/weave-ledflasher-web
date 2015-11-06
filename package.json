@@ -9,6 +9,7 @@
   "author": "",
   "license": "Apache-2.0",
   "devDependencies": {
+    "bower": "^1.6.5",
     "browser-sync": "^2.9.10",
     "connect-history-api-fallback": "^1.1.0",
     "gulp": "^3.9.0"
