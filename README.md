@@ -1,4 +1,4 @@
-# Weave Sample
+# Weave Web Sample
 
 ## Overview
 This web app is a sample for the client side JavaScript implementation of the Weave API.  
@@ -7,8 +7,9 @@ It showcases loading devices and sending commands to weave devices.  It uses Pol
 
 ## Prerequisites
 
-[Node](https://nodejs.org/en/)
-[OAuth ClientId with Weave API enabled](https://developers.google.com/weave/v1/dev-guides/getting-started/authorizing)
+* [Node](https://nodejs.org/en/)
+* [OAuth ClientId with Weave API enabled](https://developers.google.com/weave/v1/dev-guides/getting-started/authorizing)
+
 ## Setup
 
 Install dependencies
