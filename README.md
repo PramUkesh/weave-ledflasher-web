@@ -12,17 +12,13 @@ It showcases loading devices and sending commands to weave devices.  It uses Pol
 
 ## Setup
 
-Install dependencies
-1. `npm install`
+1. `npm install` - Install dependencies
 
-Install Polymer dependencies
-2. `bower install`
+2. `bower install` - Install bower dependencies
 
-Replace ClientId
-3.  replace the `google-signin` `client-id` attribute with your ClientId
+3.  replace the `google-signin` `client-id` attribute with your ClientId - Replace ClientId
 
-Start the server
-3. `gulp`
+4. `gulp` - Start the server
 
 ## How it works
 Interacting with the Weave API is broken into 3 interactions:
